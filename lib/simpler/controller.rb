@@ -24,6 +24,10 @@ module Simpler
 
     private
 
+    def status(status_from_contoller)
+      @response.status = status_from_contoller.to_i
+    end
+
     def extract_name
       self.class.name.match('(?<name>.+)Controller')[:name].downcase
     end
