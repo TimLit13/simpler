@@ -5,6 +5,9 @@ class TestsController < Simpler::Controller
 
     status 201
 
+    headers['Content-Type'] = 'text/plain'
+    headers['Debug-simpler-header'] = 'debug-simpler'
+
     render plain: "Plain text response"
   end
 

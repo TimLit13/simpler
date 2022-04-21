@@ -3,12 +3,13 @@ require_relative 'view'
 module Simpler
   class Controller
 
-    attr_reader :name, :request, :response
+    attr_reader :name, :request, :response, :headers
 
     def initialize(env)
       @name = extract_name
       @request = Rack::Request.new(env)
       @response = Rack::Response.new
+      @headers = {}
     end
 
     def make_response(action)
@@ -18,6 +19,7 @@ module Simpler
       set_default_headers
       send(action)
       write_response
+      set_header
 
       @response.finish
     end
@@ -26,6 +28,14 @@ module Simpler
 
     def status(status_from_contoller)
       @response.status = status_from_contoller.to_i
+    end
+
+    def set_header
+      if @headers.any?
+        @headers.each do |key, value|
+          @response[key.to_s] = value.to_s
+        end
+      end
     end
 
     def extract_name
