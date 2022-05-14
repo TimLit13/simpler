@@ -11,8 +11,13 @@ class TestsController < Simpler::Controller
     render plain: "Plain text response"
   end
 
-  def create
+  def show
+    @test_id = params[:id]
+    #render plain: "Here should be test with id = #{@test_id}"
+  end
 
+  def create
+    render plain: "Created"
   end
 
 end
