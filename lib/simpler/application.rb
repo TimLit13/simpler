@@ -34,6 +34,7 @@ module Simpler
 
         make_response(controller, action)
       else
+        env['simpler.response.status'] = '404'
         response_route_not_found
       end
     end

@@ -28,6 +28,7 @@ module Simpler
 
     def status(status_from_contoller)
       @response.status = status_from_contoller.to_i
+      @request.env['simpler.response.status'] = @response.status.to_s
     end
 
     def set_header
@@ -36,6 +37,7 @@ module Simpler
           @response[key.to_s] = value.to_s
         end
       end
+      @request.env['simpler.response.type'] = @response.headers['Content-Type']
     end
 
     def extract_name
